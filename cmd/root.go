@@ -27,14 +27,19 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var version = "0.1.0"
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "cbm-cli",
-	Short: "Useful Tools for Admin CODEBEAMER",
-	Long:  "",
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Use:     "cbm-cli",
+	Version: version,
+	Short:   "Useful Tools for Admin CODEBEAMER",
+	Long: `cbm-cli is a command line interface for CodeBeamer that helps administrators
+manage and interact with their CodeBeamer instance.
+
+Examples:
+  cbm-cli --version
+  cbm-cli --help`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
