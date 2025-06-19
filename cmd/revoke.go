@@ -12,10 +12,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// grantCmd represents the grant command
-var grantCmd = &cobra.Command{
-	Use:   "grant",
-	Short: "Grant user to project role",
+var revokeCmd = &cobra.Command{
+	Use:   "revoke",
+	Short: "Revoke user's project role",
 	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
 		project, _ := cmd.Flags().GetString("project")
@@ -35,7 +34,7 @@ var grantCmd = &cobra.Command{
 			url.PathEscape(role))
 
 		// Create request
-		req, err := http.NewRequest(http.MethodPut, url, nil)
+		req, err := http.NewRequest(http.MethodDelete, url, nil)
 		if err != nil {
 			fmt.Printf("Error creating request: %v\n", err)
 			return
@@ -68,14 +67,14 @@ var grantCmd = &cobra.Command{
 }
 
 func init() {
-	projectCmd.AddCommand(grantCmd)
+	projectCmd.AddCommand(revokeCmd)
 
 	// Add required flags for role and member
-	grantCmd.Flags().String("project", "", "Specify the project name (required)")
-	grantCmd.Flags().String("role", "", "Role to grant (required)")
-	grantCmd.Flags().String("member", "", "Member to grant role to (required)")
+	revokeCmd.Flags().String("project", "", "Specify the project name (required)")
+	revokeCmd.Flags().String("role", "", "Role to revoke (required)")
+	revokeCmd.Flags().String("member", "", "Member to revoke role to (required)")
 
-	grantCmd.MarkFlagRequired("project")
-	grantCmd.MarkFlagRequired("role")
-	grantCmd.MarkFlagRequired("member")
+	revokeCmd.MarkFlagRequired("project")
+	revokeCmd.MarkFlagRequired("role")
+	revokeCmd.MarkFlagRequired("member")
 }
